@@ -1,13 +1,13 @@
 ---
 - include_tasks: download_maven.yml
 
-- name: Install java
+- name: Instalacja Javy (JRE)
   apt:
     name: default-jre
     update_cache: yes
   become: true
 
-- name: Copy application
+- name: Kopiowanie aplikacji
   copy:
     src: "{{ artifact_name }}"
     dest: /home/ubuntu
@@ -15,9 +15,9 @@
     group: ubuntu
     mode: '0644'
   notify:
-  - Start application
+  - Start apki
 
-- name: Create a service definition file
+- name: Utworzenie pliku serwisu na ec2
   copy:
     src: application.service
     dest:  /etc/systemd/system/
@@ -26,7 +26,7 @@
     mode: '0644'
   become: yes
 
-- name: Start application
+- name: Uruchomienie aplikacji
   service:
     name: application
     state: restarted
