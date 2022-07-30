@@ -7,6 +7,9 @@
   apt: upgrade=dist force_apt_get=yes
   become: true
   
+- name: Waiting task 1
+  command: /bin/sleep 30
+
 - name: Install python pip
   apt:
     pkg:
@@ -21,8 +24,10 @@
   connection: local
   become: true
 
+- name: Waiting task 2
+  command: /bin/sleep 30
+
 - name: Install Python Libs
-  #debugger: always
   apt:
     pkg:
       - libxml2
@@ -33,6 +38,9 @@
       - zlib1g-dev
   connection: local
   become: true
+
+- name: Waiting task 3
+  command: /bin/sleep 30
 
 - name: Install fucking lxml
   command: "pip3 install lxml"
